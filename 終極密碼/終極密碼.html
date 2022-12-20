@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .title {
+            width: 700px;
+            margin: auto;
+            height: 600px;
+            padding: 2px;
+            background-color: #aaa;
+            border-radius: 5px;
+            position: relative;
+            text-align: center;
+        }
+
+        .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            box-sizing: border-box;
+            color: white;
+            padding: 25px;
+        }
+
+        .number-1 button {
+            font-size: 20px;
+            margin: 5px;
+            width: 62px;
+            height: 62px;
+            font-weight: bolder;
+            border-radius: 3px;
+            background-color: bisque;
+            outline: none;
+            mix-blend-mode: screen;
+            transition: 0.1s;
+            text-align: center;
+        }
+
+
+        .title h1 {
+            color: black;
+            font-size: 40px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="title">       
+        <div class="box">
+            <div class="box1">
+                <h></h>
+                <h></h>
+                <h></h>
+                <h></h>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+
+            <div class="content">
+                <h1>終極密碼</h1>
+                <div class="view">
+                    <div class="s-guess">
+                        <input type="text" class="input-num" placeholder="Input number 0~100">
+                    </div>
+                    <div class="number">
+                        <p><span></span></p>
+                        <p>
+                            <span2></span2>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="number-1">
+                    <button class="item" value="1">1</button>
+                    <button class="item" value="2">2</button>
+                    <button class="item" value="3">3</button>
+                    <br>
+                    <button class="item" value="4">4</button>
+                    <button class="item" value="5">5</button>
+                    <button class="item" value="6">6</button>
+                    <br>
+                    <button class="item" value="7">7</button>
+                    <button class="item" value="8">8</button>
+                    <button class="item" value="9">9</button>
+                    <br>
+                    <button class="reset">c</button>
+                    <button class="item" value="0">0</button>
+                    <button class="check">enter</button>
+                    <br>
+                    <button class="new" style="width: 100px;">reset</button>
+                </div>
+            </div>
+  
+    </div>
+    <script>
+        let min = 0;
+        let max = 100;
+        let answer = getAnsNumber();
+        function getAnsNumber() {
+
+            return Math.floor(Math.random() * (100 - 0) + 0);
+        }
+
+        const inputNum = document.querySelector('.input-num');
+        const numBtnList = document.querySelectorAll('button[value]');
+        numBtnList.forEach(function (numBtn) {
+            numBtn.addEventListener('click', function (event) {
+                console.log(event);
+                console.log(event.target.value);
+                inputNum.value += event.target.value;
+            })
+        })
+
+        let a = document.querySelector('h')
+        let b = document.querySelector('p')
+        let checkbtn = document.querySelector('.check')
+        checkbtn.addEventListener('click', function () {
+            let guess = inputNum.value;
+            let parse = parseInt(guess, 10);
+            console.log(parse);
+            if (isNaN(parse)) {
+                a.innerText = '請輸入數字'
+                b.innerText = `${min}~${max}`
+                inputNum.value = '';
+            }
+            if (parse < min || parse > max) {
+                a.innerText = '超出範圍'
+                b.innerText = `${min}~${max}`
+                inputNum.value = '';
+            }
+            else {
+                if (parse === answer) {
+                    console.log(answer);
+                    b.innerText = parse
+                    inputNum.value = '';
+                    min = 0;
+                    max = 100;
+                    a.innerText = '你猜中了'
+                    answer = getAnsNumber();
+                }
+                else if (parse < answer) {
+                    min = parse;
+                    inputNum.value = '';
+                    a.innerText = `再接再厲`
+                    b.innerText = `${min}~${max}`
+                }
+                else if (parse > answer) {
+                    max = parse;
+                    inputNum.value = '';
+                    a.innerText = `再接再厲`
+                    b.innerText = `${min}~${max}`
+                }
+
+            }
+        })
+        let newbtn = document.querySelector('.new')
+        newbtn.addEventListener('click', function () {
+            resetGame();
+        })
+        function resetGame() {
+            inputNum.value = '';
+            min = 0;
+            max = 100;
+            a.innerText = `請輸入數字`
+            b.innerText = `${min}~${max}`
+            answer = getAnsNumber();
+        }
+
+        let resetbtn = document.querySelector('.reset')
+        resetbtn.addEventListener('click', function () {
+            inputNum.value = '';
+        })
+    </script>
+    
+</body>
+</html>
