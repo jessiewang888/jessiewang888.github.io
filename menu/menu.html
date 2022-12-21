@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<!-- <link href="menu2.css" rel="stylesheet" type="text/css"> -->
+<script src="jquery-3.6.0.js"></script>
+<style>
+	@charset "utf-8";
+*{
+		margin: 0;
+		padding: 0;
+}
+
+body {
+	margin:0;
+}
+
+#toggle {
+	display: none; /*不見*/
+}
+#nav {
+	width:500px;
+	margin:auto;
+}
+#nav li {
+	width:100px;
+	height: auto;
+	list-style-type:none;
+	float:left;
+	text-align: center;
+	background-color:black;
+	padding:10px 0;
+}
+#nav li:hover {
+	background-color: rgba(99,99,99,1.00);
+}
+#nav ul {
+	padding:0;
+	margin:0;
+}
+#nav a {
+	color:white;
+	text-decoration: none;
+	font-family: "Arial Black", "sans-serif", "微軟正黑體";
+}
+#nav ol {
+	margin:12px 0 0 0;
+	padding:0;
+	display:none; /*子選單隱藏*/
+}
+#nav ol li {
+	background-color: rgba(99,99,99,1.00);
+}
+@media screen and (max-width:768px){
+	#toggle{
+		width:auto;
+		display:block;
+		padding:10px 0;
+		background-color: black;
+		color:white;
+		text-align: center;
+		font-size: 18px;
+	}
+	#nav {
+		width:100%;
+		display:none;
+	}
+	#nav li {
+	width:100%;
+	float:none;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+	<toggle id="toggle">&equiv;</toggle>
+	<nav id="nav">
+	   <ul>
+		  <li><a href="#">關於設計</a></li>
+		  <li class="smBT">
+			  <a href="#">設計旅行</a>
+		      <ol class="sm">
+				  <li><a href="#">南美洲</a></li>
+				  <li><a href="#">歐亞洲</a></li>
+				  <li><a href="#">大洋洲</a></li>
+			  </ol> 
+		   </li>
+		  <li class="smBT">
+			  <a href="#">最新消息</a>
+		      <ol class="sm">
+			      <li><a href="#">設計比賽</a></li>
+				  <li><a href="#">設計活動</a></li>
+				  <li><a href="#">展覽資訊</a></li>
+			  </ol>
+		  </li>
+		  <li><a href="#">設計講座</a></li>
+		  <li><a href="#">聯絡我們</a></li>
+	   </ul>
+	</nav>
+	<script>
+		$(function(){
+			//開始
+			$(window).resize(function(){
+				$(".sm").css("display","none")
+				var juliet = $(window).width();
+				if(juliet>=601){
+					$("#nav").css("display","block");
+				}else{
+					$("#nav").css("display","none");
+				}
+			})
+			//
+			$("#toggle").click(function(){
+				var romio = $("#nav").css("display")
+				if(romio=="none"){
+					$("#nav").css("display","block");
+					
+				}else{
+					$("#nav").css("display","none");
+				}
+			})
+			//
+			$(".smBT").mouseleave(function(){
+				$(".sm").css("display","none")
+			})
+			//
+			$(".smBT").click(function(){
+				$(".sm").css("display","none")
+				var tom = $(this).find(".sm").css("display")
+				if(tom=="none"){
+					$(this).find(".sm").css("display","block")
+				}else{
+					$(this).find(".sm").css("display","none")
+				}
+			})
+			//結束
+		})	
+	</script>
+</body>
+</html>
