@@ -2210,17 +2210,46 @@
                 //alert("以文字迭代英雄人物資料！");
                 heroArray.forEach(hero => {
                     container.innerHTML +=`<p>${JSON.stringify(hero)}</p>`
-                })                
+                })     
+                //轉成jason的資料形式           
             });
 
             btnTableHero.addEventListener("click", function(){
-                container.innerHTML = '';
+                // container.innerHTML = '';
                 if(heroArray.length==0){
                     alert("請先建立陣列資料");
                     return;
                 }
                 
                 alert("以表格呈現英雄人物資料！");
+
+                document.querySelector("#container").innerHTML = " ";
+
+                table = document.createElement('table')
+                table.setAttribute("class", "table table-bordered table-striped table-dark");
+                // let thead = document.createElement('thead')
+                tbody = document.createElement('tbody')
+                heroArray.forEach(heros => {
+                    let tbodyTr = document.createElement('tr')
+
+                    
+                    let tbodyTd = document.createElement('td')
+                    tbodyTd.innerHTML = heros.id
+                    let tbodyTdOne = document.createElement('td')
+                    tbodyTdOne.innerHTML = heros.name
+                    let tbodyTdTwo = document.createElement('td')
+                    tbodyTdTwo.innerHTML = heros.content
+                    let tbodyTdThree = document.createElement('td')
+                    tbodyTdThree.innerHTML = heros.url
+                    tbodyTr.appendChild(tbodyTd)
+                    tbodyTr.appendChild(tbodyTdOne)
+                    tbodyTr.appendChild(tbodyTdTwo)
+                    tbodyTr.appendChild(tbodyTdThree)
+                    tbody.appendChild(tbodyTr)
+                });
+                table.appendChild(tbody)
+                console.log(table)
+                container.append(table)
             });
         }
 
