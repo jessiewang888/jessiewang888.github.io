@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .title {
+            width: 350px;
+            margin: auto;
+            height: 300px;
+            padding: 2px;
+            background-image: url(260x260.png);
+            border-radius: 30px;
+            position: relative;
+            text-align: center;
+        }
+        .title h1 {
+            margin: 50px;
+            color:black;
+            font-size: 20px;
+
+        }
+        .content{
+            text-align: center;
+            margin: 100px;
+        }
+        .record{
+            width: 300px;
+            margin: 10px auto 5px;
+        }
+        .wrap button{
+            margin: 0px 10px;
+            padding: 5px 10px;
+        }
+        input{
+            width: 200px;
+        }
+        .Show{
+            display: flex;
+            align-items: center;
+        }
+        .Show div{
+            /* font-family: Andale Mono; */
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            height: fit-content;
+        }
+        .showXY{
+            background-color: rgb(249, 210, 210);
+        }
+        .showABWin{
+            background-color: rgb(208, 246, 208);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h1>開始遊戲~需要不同數字</h1>        
+        <div class="guess">
+            <input type="text" class="inputAns" maxlength="4">
+            <button class="guess">Guess</button>
+        </div>
+        <div class="record"></div>
+        <div class="wrap">
+            <button class="start">開始</button>
+            <button class="try">再一次</button>
+            <button class="answer">答案</button>
+        </div> 
+  
+    </div>
+    <script>
+        //取dom節點
+        let startBtn = document.querySelector('.start');
+        let guessBtn = document.querySelector('.guess');
+        let tryBtn = document.querySelector('.try');
+        let answerBtn = document.querySelector('.answer');
+        let record = document.querySelector('.record');
+        let inputAns = document.querySelector('.inputAns');
+        let userEnter;
+        let answer_1;
+        let X;
+        let Y;
+        let ShowXY;
+        let ShowInput;
+        let enterHistory;
+
+
+
+        startBtn.addEventListener('click', function(){
+            getRondom();
+            buttonControl(false);
+
+        })
+
+        tryBtn.addEventListener('click', function(){
+            buttonControl(true);
+            getRondom();
+            init();
+        })
+
+        guessBtn.addEventListener('click', function(){
+            userEnter = inputAns.value
+            if (isNaN(userEnter)){
+                alert('It is not number !')
+            }else if(userEnter.length != 4){
+                alert('Please enter four digits !')
+            }
+            compareAns = Array.from(userEnter)
+            let answer = answerArray.map(x => x.toString())
+            X = 0;
+            Y = 0;
+            for(let i=0; i<=3; i++){
+                if(answer[i] == compareAns){
+                    X++;
+                }
+                if(compareAns.includes(answer[i])){
+                    Y++;
+                }
+                if (X == 4){
+                    Msg();
+                    ShowXY.innerText = `${A}A${B}B`
+                    ShowInput.ineerText = `${ans}`
+                    alert('pass !')
+                }else if(userEnter.length == 4 && !isNaN(userEnter)){
+                    Msg();
+                    ShowXY.innerText = `${A}A${B}B`
+                    ShowInput.innerText = `{compareAns.join('')}`
+
+                }
+            
+            }
+            inputAns.value='';
+
+        })
+
+        answerBtn.addEventListener('click', function(){
+            answer_1 = answerArray.join('');
+            alert(`the anaswer is ${ans}`);
+        })
+
+
+        function getRondom(){
+                //return Math.floor(Math.random()*10000+1); 此方法可能會產生相同的數字
+                let answer = [] 
+                for(let i=0;i<10;i++){
+                    answer.push(i) //將數字0~9放到answer陣列裡面
+                }
+                answer.sort(function(){
+                    return 0.5 - Math.random();  //將陣列裡的數字打亂
+                })
+                answerArray = answer.slice(0,4) //取前四個數字（start,end）
+                console.log(answerArray)
+            }
+        
+        
+        function Msg(){
+            enterHistory = document.createElement('div')
+            enterHistory.setAttribute('class','Show')
+            ShowXY = document.createElement('div')
+            ShowInput = document.createElement('div')
+            if(X == 4){
+                ShowXY.setAttribute('class','showXYWin')
+            }
+            else{
+                ShowXY.setAttribute('class','ShowXY')
+            }
+            enterHistory.append(ShowXY,ShowInput)
+            record.append(enterHistory);
+
+        }
+
+        function init(){
+            record.innerHTML = '';
+        }
+
+        function buttonControl(bool){
+            starBtn.disable = !bool;
+            tryBtn.disable = bool;
+            answerBtn.disable = bool;
+            guessBtn.disable = bool;
+        }
+        </script>
+</body>
+</html>
+  
