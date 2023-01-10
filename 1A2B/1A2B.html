@@ -40,24 +40,25 @@
 
     <script>
         let num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-let answer = [];
-for (let i=0; i<4; i++) {
-    let idx = Math.floor(Math.random()*num.length);
-    answer.push(num[idx]);
-    num.splice(idx, 1);
-}
+        let answer = [];
 
-let times = 0;
 
-$('#submit').click(function() {
-    let a = 0
-    let b = 0;
-    let g = $('#input').val();
-    $('#input').val('');
-    
-    for (let i=0; i<4; i++) {
-        let idx = answer.indexOf(g[i]);
-        if (idx != -1) {
+        for (let i=0; i<4; i++) {
+            let idx = Math.floor(Math.random()*num.length);
+            answer.push(num[idx]);
+            num.splice(idx, 1);
+            }
+        
+        let times = 0;
+        
+        $('#submit').click(function() {
+            let a = 0
+            let b = 0;
+            let g = $('#input').val();
+            $('#input').val('');
+            for (let i=0; i<4; i++) {
+                let idx = answer.indexOf(g[i]);
+            if (idx != -1) {
             if (idx == i) {
                 a++;
             } else {
