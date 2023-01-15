@@ -11,20 +11,21 @@
             *{
                 margin: 0;
                 padding: 0;
-                background-color: blanchedalmond;
+                background-color:aliceblue;
             }
-            /* i {
-                font-size: 50px;
+            h1{
+                text-align: center;
+
             }
-    
-            #next {
-                transform: rotate(180deg);
-            } */
+       
         </style>
 </head>
 
 <body>
     <h1 class="year-month">0000年 - 00月</h1>
+    <button onclick="previousMonth()" class="btn btn-primary">previous</button>
+    <button onclick="nextMonth()" class="btn btn-primary">next</button>
+        
     <table class="table">
         <thead>
             <tr>
@@ -41,8 +42,6 @@
             <!-- 動態渲染日期 -->
         </tbody>
     </table>
-    <!-- <button onclick="previousMonth()" class="btn btn-primary">previous</button>
-    <button onclick="nextMonth()" class="btn btn-primary">next</button> -->
 
     <div id="add-modal" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
@@ -61,8 +60,6 @@
             </div>
         </div>
     </div>
-    <button onclick="previousMonth()" class="btn btn-primary">previous</button>
-    <button onclick="nextMonth()" class="btn btn-primary">next</button>
 
    <!-- 新增行程Modal -->
    <div id="add-modal" class="modal fade" tabindex="-1">
